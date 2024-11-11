@@ -42,27 +42,41 @@ navegacion.appendChild(nuevoEnlace); // appendChild agrega al final del elemento
 
 // Eventos en JS
 
-console.log(1);
+// console.log(1);
 
 window.addEventListener('load', function () { // load espera a que el JS y los archivos que dependen del HTML estén listos.
-    console.log(2);
+    // console.log(2);
 });
 
 window.onload = function () {
-    console.log(3);
+    // console.log(3);
 } // Es básicamente lo mismo que el anterior.
 
 // DOMContentLoaded espera a que el HTML esté listo, pero no espera a que los archivos que dependen del HTML estén listos, usualmente se usa este.
 document.addEventListener('DOMContentLoaded', function () {
-    console.log(4);
+    // console.log(4);
 });
 
-console.log(5);
+// console.log(5);
 
 function imprimir() {
-    console.log(6);
+    // console.log(6);
 }
 
-window.onscroll = function () {
-    console.log('scrolling...');
-} // Se ejecuta cada vez que se hace scroll.
+// window.onscroll = function () {
+//     console.log('scrolling...');
+// } // Se ejecuta cada vez que se hace scroll.
+
+// Seleccionar elementos y asociarles un evento
+const btnEnviar = document.querySelector('.boton--primario');
+btnEnviar.addEventListener('click', function (event) {
+    console.log(event);
+    event.preventDefault(); // Previene la acción por defecto del elemento.
+    console.log('enviando formulario...');
+});
+
+// Eventos de los inputs y textarea
+const nombre = document.querySelector('#nombre');
+nombre.addEventListener('change', function (event) {
+    console.log(event.target.value);
+});
