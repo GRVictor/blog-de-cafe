@@ -131,5 +131,4 @@ function mostrarAlerta(mensaje, error = null) {
     setTimeout(() => {
         alerta.remove();
     }, 5000);
-
 }
