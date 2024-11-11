@@ -68,15 +68,68 @@ function imprimir() {
 // } // Se ejecuta cada vez que se hace scroll.
 
 // Seleccionar elementos y asociarles un evento
-const btnEnviar = document.querySelector('.boton--primario');
-btnEnviar.addEventListener('click', function (event) {
-    console.log(event);
-    event.preventDefault(); // Previene la acción por defecto del elemento.
-    console.log('enviando formulario...');
-});
+// const btnEnviar = document.querySelector('.boton--primario');
+// btnEnviar.addEventListener('click', function (event) {
+//     console.log(event);
+//     event.preventDefault(); // Previene la acción por defecto del elemento.
+//     console.log('enviando formulario...');
+// });
 
 // Eventos de los inputs y textarea
+
+const datos = { 
+    nombre: '',
+    email: '',
+    mensaje: ''
+ };
+
+// Variables en la parte superior
 const nombre = document.querySelector('#nombre');
-nombre.addEventListener('change', function (event) {
-    console.log(event.target.value);
+const email = document.querySelector('#email');
+const mensaje = document.querySelector('#mensaje');
+const formulario = document.querySelector('.formulario');
+
+// Después todos los eventListeners
+nombre.addEventListener('input', leerTexto);
+email.addEventListener('input', leerTexto);
+mensaje.addEventListener('input', leerTexto);
+// El evento de submit
+formulario.addEventListener('submit', function (event) {
+    event.preventDefault();
+    // Validar el formulario
+    const { nombre, email, mensaje } = datos;
+
+    if(nombre === '' || email === '' || mensaje === '') {
+        mostrarAlerta('Todos los campos son obligatorios', 'error');
+        return;
+    }
+
+    // Crear la alerta de éxito
+    mostrarAlerta('Mensaje enviado correctamente');
+
 });
+
+// Y después las algunas funcionaes que se vayan a utilizar.
+function leerTexto(e) {
+    // console.log(e.target.value);
+    datos[e.target.id] = e.target.value;
+    // console.log(datos);
+}
+
+function mostrarAlerta(mensaje, error = null) {
+    const alerta = document.createElement('P');
+    alerta.textContent = mensaje;
+
+    if(error) {
+        alerta.classList.add('error');
+    } else {
+        alerta.classList.add('exito');
+    }
+
+    formulario.appendChild(alerta);
+
+    setTimeout(() => {
+        alerta.remove();
+    }, 5000);
+
+}
